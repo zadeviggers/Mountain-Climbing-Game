@@ -13,8 +13,9 @@ public class PlayerController : MonoBehaviour
 
 
     // Player state
-    public bool onGrip = true;
+    public bool onGrip = false;
     Vector2 direction;
+    GripController currentGrip = null;
 
 
     void Start()
@@ -44,6 +45,19 @@ public class PlayerController : MonoBehaviour
         HandleMouseRelease();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        GripController grip = other.GetComponent<GripController>();
+        Debug.Log(other);
+        if (grip != null && !grip.Equals(currentGrip))
+        {
+            onGrip = true;
+            transform.position = other.transform.position;
+            rb.velocity = Vector3.zero;
+            currentGrip = grip;
+        }
+    }
+
     public void HandleMouseRelease()
     {
         if (!onGrip) return;
@@ -55,6 +69,6 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(direction * speed);
 
         // Reset dragpoint
-        dragPoint.transform.position = Vector3.zero;
+        dragPoint.transform.localPosition = Vector3.zero;
     }
 }
