@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Distance from the camera that things are
-    public static int distance = 10;
 
     // Parameters
-    public GameObject dragPoint;
+    public DragPointController dragPoint;
 
 
     // Components
@@ -16,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
 
     // Player state
-    bool onGrip = true;
+    public bool onGrip = true;
     Vector2 direction;
 
 
@@ -42,13 +40,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // When the mouse starts dragging on the player
     void OnMouseDrag()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
-        Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-
-        dragPoint.transform.position = objPosition;
-
+        dragPoint.HandleMouseDrag();
     }
 }
