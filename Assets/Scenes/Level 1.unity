@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 347392983}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,6 +244,7 @@ MonoBehaviour:
   dragPoint: {fileID: 778865449}
   speed: 120
   onGrip: 1
+  canReAttachToCurrentGrip: 0
 --- !u!54 &347392983
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DragPointController : MonoBehaviour
 {
-    public PlayerController player;
 
     public static int distance = 10;
 
@@ -27,12 +26,12 @@ public class DragPointController : MonoBehaviour
 
     private void OnMouseUp()
     {
-        player.HandleMouseRelease();
+        GameManager.theManager.player.HandleMouseRelease();
     }
 
     public void HandleMouseDrag()
     {
-        if (!player.onGrip)
+        if (!GameManager.theManager.player.onGrip)
             return;
 
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
