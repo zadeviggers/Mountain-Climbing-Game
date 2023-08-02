@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     // Parameters
     public DragPointController dragPoint;
-
+    public float speed;
 
     // Components
     Rigidbody rb;
@@ -30,19 +29,32 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position, direction);
 
 
-        if (onGrip)
-        {
-            rb.useGravity = false;
-        }
-        else
-        {
-            rb.useGravity = true;
-        }
+        rb.useGravity = !onGrip;
+
     }
 
     // When the mouse starts dragging on the player
     void OnMouseDrag()
     {
         dragPoint.HandleMouseDrag();
+    }
+
+    void OnMouseUp()
+    {
+        HandleMouseRelease();
+    }
+
+    public void HandleMouseRelease()
+    {
+        if (!onGrip) return;
+
+        // Move off grip
+        onGrip = false;
+
+        // Apply the movement
+        rb.AddForce(direction * speed);
+
+        // Reset dragpoint
+        dragPoint.transform.position = Vector3.zero;
     }
 }

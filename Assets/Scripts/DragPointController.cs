@@ -25,6 +25,11 @@ public class DragPointController : MonoBehaviour
         HandleMouseDrag();
     }
 
+    private void OnMouseUp()
+    {
+        player.HandleMouseRelease();
+    }
+
     public void HandleMouseDrag()
     {
         if (!player.onGrip)
@@ -35,4 +40,6 @@ public class DragPointController : MonoBehaviour
 
         transform.position = objPosition;
     }
+
+
 }
