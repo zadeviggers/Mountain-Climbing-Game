@@ -46,6 +46,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void AttachToGrip(GripController grip)
+    {
+        onGrip = true;
+        currentGrip = grip;
+        transform.position = grip.transform.position;
+        rb.velocity = Vector3.zero;
+    }
+
 
     public void HandleMouseRelease()
     {
@@ -59,5 +67,10 @@ public class PlayerController : MonoBehaviour
 
         // Reset dragpoint
         dragPoint.transform.localPosition = Vector3.zero;
+    }
+
+    public void Respawn()
+    {
+        AttachToGrip(currentGrip);
     }
 }
