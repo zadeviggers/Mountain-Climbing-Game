@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager theManager;
     public PlayerController player;
+    public LevelBoundriesController levelBoundries;
+    public CameraController camera;
 
 
     // Start is called before the first frame update
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
         player = FindFirstObjectByType<PlayerController>();
+        levelBoundries = FindFirstObjectByType<LevelBoundriesController>();
+        camera = FindFirstObjectByType<CameraController>();
     }
 
 }

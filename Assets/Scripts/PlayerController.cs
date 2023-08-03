@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
         currentGrip = grip;
         transform.position = grip.transform.position;
         rb.velocity = Vector3.zero;
+
+        GameManager.theManager.levelBoundries.MoveToPlayer();
+        GameManager.theManager.camera.MoveToPlayer();
     }
 
 
@@ -67,6 +70,8 @@ public class PlayerController : MonoBehaviour
 
         // Reset dragpoint
         dragPoint.transform.localPosition = Vector3.zero;
+
+      
     }
 
     public void Respawn()

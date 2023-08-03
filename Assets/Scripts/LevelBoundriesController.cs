@@ -22,4 +22,12 @@ public class LevelBoundriesController : MonoBehaviour
             GameManager.theManager.player.Respawn();
         }
     }
+
+    public void MoveToPlayer() {
+        transform.position = new Vector3(
+            transform.position.x,
+            GameManager.theManager.player.transform.position.y,
+            transform.position.z
+        );
+    }
 }
