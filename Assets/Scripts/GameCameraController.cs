@@ -3,12 +3,21 @@ using System.Collections;
 
 public class GameCameraController : MonoBehaviour
 {
-    public static float playerOffset = 0.75f;
-    public static float moveDuration = 1f;
 
+
+
+
+    // Paramaters
+    public AnimationCurve moveCurve;
+    public float moveDuration;
+    public float playerOffset;
+
+
+    // State
     Vector3 currentlyMovingTo;
     Vector3 startPosition;
     float moveProgress = 0;
+
 
     private void Start()
     {
@@ -23,7 +32,7 @@ public class GameCameraController : MonoBehaviour
             if (moveProgress < moveDuration)
             {
                 moveProgress += Time.deltaTime;
-                transform.position = Vector3.Lerp(startPosition, currentlyMovingTo, moveProgress / moveDuration);
+                transform.position = Vector3.Lerp(startPosition, currentlyMovingTo, moveCurve.Evaluate(moveProgress / moveDuration));
             }
             // Just in case we don't make it in time
             else if (!transform.position.Equals(currentlyMovingTo))
