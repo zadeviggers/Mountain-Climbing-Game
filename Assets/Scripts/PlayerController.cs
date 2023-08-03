@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         GameManager.theManager.levelBoundries.MoveToPlayer();
-        GameManager.theManager.camera.MoveToPlayer();
+        GameManager.theManager.gameCamera.MoveToPlayer();
     }
 
 

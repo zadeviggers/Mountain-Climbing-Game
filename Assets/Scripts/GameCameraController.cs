@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour
+public class GameCameraController : MonoBehaviour
 {
-    // Use this for initialization
+    public static float playerOffset = 0.75f;
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
-    public void MoveToPlayer() {
+    public void MoveToPlayer()
+    {
         // Move Camera 
         transform.position = new Vector3(
             transform.position.x,
-           GameManager.theManager.player.transform.position.y,
+            GameManager.theManager.player.transform.position.y + playerOffset,
             transform.position.z
         );
     }
