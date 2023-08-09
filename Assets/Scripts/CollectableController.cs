@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectableController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float spinSpeed = 30f;
     void OntriigerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -13,9 +13,8 @@ public class CollectableController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //transform.Rotate(spinSpeed* Vector3.left * Time.deltaTime);
     }
 }
