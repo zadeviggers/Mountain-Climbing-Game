@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class CollectableController : MonoBehaviour
 {
+    Animator animator;
+    Collider collider;
     public float spinSpeed = 30f;
-    void OntriigerEnter(Collider other)
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        collider = GetComponent<Collider>();
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
-        }
-    }
+            // Disable the collider
+            collider.enabled = false;
 
-    void Update()
-    {
-        //transform.Rotate(spinSpeed* Vector3.left * Time.deltaTime);
+            // The animator will destory the star object once the collect animation finishes
+            animator.SetTrigger("Collected");
+        }
     }
 }
