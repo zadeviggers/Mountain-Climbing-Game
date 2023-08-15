@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectableController : MonoBehaviour
 {
     Animator animator;
-    Collider collider;
+    new Collider collider;
     public float spinSpeed = 30f;
 
     private void Start()
@@ -19,7 +19,7 @@ public class CollectableController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Disable the collider
-            collider.enabled = false;
+            GetComponent<Collider>().enabled = false;
 
             // The animator will destory the star object once the collect animation finishes
             animator.SetTrigger("Collected");
