@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     public LevelBoundriesController levelBoundries;
     public GameCameraController gameCamera;
+    public LevelGenerator levelGenerator;
 
 
     // Start is called before the first frame update
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         player = FindFirstObjectByType<PlayerController>();
         levelBoundries = FindFirstObjectByType<LevelBoundriesController>();
         gameCamera = FindFirstObjectByType<GameCameraController>();
+        levelGenerator = FindAnyObjectByType<LevelGenerator>();
     }
 
 }
