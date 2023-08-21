@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
         GameManager.theManager.levelBoundries.MoveToPlayer();
         GameManager.theManager.gameCamera.MoveToPlayer();
+        GameManager.theManager.levelGenerator.HandlePlayerMoved();
     }
 
 

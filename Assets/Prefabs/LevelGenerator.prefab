@@ -44,3 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3fe68c3556b4e788084c07466e830b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  segmentHeight: 10
+  numberOfGrips: 3
+  numberOfSpikes: 3
+  numberOfCollectables: 3
+  levelWidth: 6
+  gripPrefab: {fileID: 6493352726441577608, guid: a3e0fd73b0136469ebb120b82e98883d, type: 3}
+  spikePrefab: {fileID: 4545997161636224310, guid: 90652483936bb45569d4d587daed0c97, type: 3}
+  collectablePrefab: {fileID: 1392843603813194438, guid: 1854c8284963b4bb0aa1cdb7ec3ee58f, type: 3}
