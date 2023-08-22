@@ -46,9 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentHeight: 10
   numberOfGrips: 3
-  numberOfSpikes: 3
-  numberOfCollectables: 3
+  numberOfSpikes: 1
+  numberOfCollectables: 1
   levelWidth: 6
+  yRandomnessMultiplier: 1
   gripPrefab: {fileID: 6493352726441577608, guid: a3e0fd73b0136469ebb120b82e98883d, type: 3}
   spikePrefab: {fileID: 4545997161636224310, guid: 90652483936bb45569d4d587daed0c97, type: 3}
   collectablePrefab: {fileID: 1392843603813194438, guid: 1854c8284963b4bb0aa1cdb7ec3ee58f, type: 3}
