@@ -47,7 +47,7 @@ MonoBehaviour:
   segmentHeight: 10
   numberOfGrips: 3
   numberOfSpikes: 1
-  numberOfCollectables: 1
+  numberOfCollectables: 2
   levelWidth: 6
   yRandomnessMultiplier: 1
   gripPrefab: {fileID: 6493352726441577608, guid: a3e0fd73b0136469ebb120b82e98883d, type: 3}

@@ -39,10 +39,14 @@ public class LevelGenerator : MonoBehaviour
     {
         return Random.Range(-(levelWidth / 2), levelWidth / 2);
     }
+        float GetYPos(int i, int perSegment)
+    {
+        return lastSegmentY + (i * (segmentHeight / perSegment)) + RandomYOffset();
+    }
 
     float RandomYOffset()
     {
-        return Random.Range(-1, 1) * yRandomnessMultiplier;
+        return (Random.Range(-100, 100) / 100) * yRandomnessMultiplier;
     }
 
     void GenerateNextSegment()
@@ -50,8 +54,17 @@ public class LevelGenerator : MonoBehaviour
         // Spawn grips
         for (int i = 0; i < numberOfGrips; i++)
         {
-            float yPos = lastSegmentY + (i * (segmentHeight / numberOfGrips)) + RandomYOffset();
-            spawnedObjects.Add(Instantiate(gripPrefab, new Vector3(RandomX(), yPos, 0), Quaternion.identity).gameObject);
+            spawnedObjects.Add(Instantiate(gripPrefab, new Vector3(RandomX(), GetYPos(i, numberOfGrips), 0), Quaternion.identity).gameObject);
+        }
+        // Spawn spikes
+        for (int i = 0; i < numberOfSpikes; i++)
+        {
+            spawnedObjects.Add(Instantiate(spikePrefab, new Vector3(RandomX(), GetYPos(i, numberOfSpikes), 0), Quaternion.identity).gameObject);
+        }
+        // Spawn collectables
+        for (int i = 0; i < numberOfCollectables; i++)
+        {
+            spawnedObjects.Add(Instantiate(collectablePrefab, new Vector3(RandomX(), GetYPos(i, numberOfCollectables), 0), Quaternion.identity).gameObject);
         }
         lastSegmentY += segmentHeight;
     }
@@ -71,8 +84,8 @@ public class LevelGenerator : MonoBehaviour
         {
             if (obj.transform.position.y < lastSegmentY - (3*segmentHeight))
             {
-                Destroy(obj);
                 toRemove.Add(obj);
+                Destroy(obj);
             }
         }
         // Can't remove from a list while looping over it
