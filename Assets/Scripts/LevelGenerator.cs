@@ -11,7 +11,7 @@ public class LevelGenerator : MonoBehaviour
     public int numberOfCollectables;
     public float levelWidth;
     public float yRandomnessMultiplier;
- 
+
     // Prefabs
     public GripController gripPrefab;
     public SpikeController spikePrefab;
@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
 
     // Internal state
     float lastSegmentY = 0f;
-    List<GameObject> spawnedObjects= new List<GameObject>();
+    List<GameObject> spawnedObjects = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,9 @@ public class LevelGenerator : MonoBehaviour
         if (segmentHeight <= 0)
         {
             Debug.LogError("Provide a value greater than 0 for segmentHeight!");
-        } else {
+        }
+        else
+        {
             GenerateNextSegment();
         }
     }
@@ -39,7 +41,7 @@ public class LevelGenerator : MonoBehaviour
     {
         return Random.Range(-(levelWidth / 2), levelWidth / 2);
     }
-        float GetYPos(int i, int perSegment)
+    float GetYPos(int i, int perSegment)
     {
         return lastSegmentY + (i * (segmentHeight / perSegment)) + RandomYOffset();
     }
@@ -69,7 +71,8 @@ public class LevelGenerator : MonoBehaviour
         lastSegmentY += segmentHeight;
     }
 
-    public void HandlePlayerMoved() {
+    public void HandlePlayerMoved()
+    {
         if (GameManager.theManager.player.transform.position.y + segmentHeight >= lastSegmentY)
         {
             GenerateNextSegment();
@@ -79,16 +82,21 @@ public class LevelGenerator : MonoBehaviour
 
     public void RemoveOldSpawnedObjects()
     {
-        List<GameObject> toRemove = new List<GameObject>();
-        foreach (GameObject obj in spawnedObjects)
+        List<GameObject> toDestroy = new List<GameObject>();
+        // Loop in reverse so we can remove objects safely
+        for (int i = spawnedObjects.Count - 1; i >= 0; i--)
         {
-            if (obj.transform.position.y < lastSegmentY - (3*segmentHeight))
+            var obj = spawnedObjects[i];
+            if (obj.transform.position.y < lastSegmentY - (3 * segmentHeight))
             {
-                toRemove.Add(obj);
-                Destroy(obj);
+                spawnedObjects.RemoveAt(i);
+                toDestroy.Add(obj);
             }
         }
-        // Can't remove from a list while looping over it
-        toRemove.ForEach((el)=>spawnedObjects.Remove(el));
+        foreach (var obj in toDestroy)
+        {
+            Destroy(obj);
+        }
+
     }
 }
