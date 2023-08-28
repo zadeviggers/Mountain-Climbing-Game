@@ -41,7 +41,7 @@ public class LevelGenerator : MonoBehaviour
     {
         return Random.Range(-(levelWidth / 2), levelWidth / 2);
     }
-    float GetYPos(int i, int perSegment)
+    float GetBaseYPos(int i, int perSegment)
     {
         return lastSegmentY + (i * (segmentHeight / perSegment)) + RandomYOffset();
     }
@@ -56,17 +56,17 @@ public class LevelGenerator : MonoBehaviour
         // Spawn grips
         for (int i = 0; i < numberOfGrips; i++)
         {
-            spawnedObjects.Add(Instantiate(gripPrefab, new Vector3(RandomX(), GetYPos(i, numberOfGrips), 0), Quaternion.identity).gameObject);
+            spawnedObjects.Add(Instantiate(gripPrefab, new Vector3(RandomX(), GetBaseYPos(i, numberOfGrips), 0), Quaternion.identity).gameObject);
         }
         // Spawn spikes
         for (int i = 0; i < numberOfSpikes; i++)
         {
-            spawnedObjects.Add(Instantiate(spikePrefab, new Vector3(RandomX(), GetYPos(i, numberOfSpikes), 0), Quaternion.identity).gameObject);
+            spawnedObjects.Add(Instantiate(spikePrefab, new Vector3(RandomX(), GetBaseYPos(i, numberOfSpikes) + segmentHeight / 2, 0), Quaternion.identity).gameObject);
         }
         // Spawn collectables
         for (int i = 0; i < numberOfCollectables; i++)
         {
-            spawnedObjects.Add(Instantiate(collectablePrefab, new Vector3(RandomX(), GetYPos(i, numberOfCollectables), 0), Quaternion.identity).gameObject);
+            spawnedObjects.Add(Instantiate(collectablePrefab, new Vector3(RandomX(), GetBaseYPos(i, numberOfCollectables), 0), Quaternion.identity).gameObject);
         }
         lastSegmentY += segmentHeight;
     }
@@ -82,21 +82,21 @@ public class LevelGenerator : MonoBehaviour
 
     public void RemoveOldSpawnedObjects()
     {
-        List<GameObject> toDestroy = new List<GameObject>();
-        // Loop in reverse so we can remove objects safely
-        for (int i = spawnedObjects.Count - 1; i >= 0; i--)
+        GameObject[] currentObjects = spawnedObjects.ToArray();
+        List<GameObject> survivingObjects = new List<GameObject>();
+        for (int i = 0; i < currentObjects.Length; i++)
         {
-            var obj = spawnedObjects[i];
+            var obj = currentObjects[i];
+            if (obj == null) continue;
             if (obj.transform.position.y < lastSegmentY - (3 * segmentHeight))
             {
-                spawnedObjects.RemoveAt(i);
-                toDestroy.Add(obj);
+                Destroy(obj);
+            }
+            else
+            {
+                survivingObjects.Add(obj);
             }
         }
-        foreach (var obj in toDestroy)
-        {
-            Destroy(obj);
-        }
-
+        spawnedObjects = survivingObjects;
     }
 }
